@@ -134,6 +134,26 @@ LinkedMap.prototype = {
         return this._length;
     },
 
+    toArray: function toArray() {
+        let arr = [];
+
+        this.forEach(function (key, value) {
+            arr.push(value);
+        });
+
+        return arr;
+    },
+
+    toMap: function toMap() {
+        let map = Object.create(null);
+
+        this.forEach(function (key, value) {
+            map[key] = value;
+        });
+
+        return map;
+    },
+
     inspect: function inspect() {
         let repr = [];
 
