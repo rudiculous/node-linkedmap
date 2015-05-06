@@ -166,6 +166,20 @@ LinkedMap.prototype = {
 
 };
 
+// TODO: Put this in the above declaration ([]-syntax not yet supported in objects).
+LinkedMap.prototype[Symbol.iterator] = function iterator() {
+    let self = this;
+
+    return (function* () {
+        let item = self._head;
+
+        while (item != null) {
+            yield [item.key, item.value];
+            item = item.next;
+        }
+    }());
+};
+
 exports = module.exports = LinkedMap;
 
 /**
