@@ -20,7 +20,7 @@ function LinkedMap() {
 
 LinkedMap.prototype = {
 
-    clear: function clear() {
+    clear() {
         this._head = null;
         this._tail = null;
         this._length = 0;
@@ -31,11 +31,11 @@ LinkedMap.prototype = {
         });
     },
 
-    containsKey: function containsKey(key) {
+    containsKey(key) {
         return _prefix(key) in this._map;
     },
 
-    forEach: function forEach(func) {
+    forEach(func) {
         let item = this._head;
 
         while (item != null) {
@@ -44,7 +44,7 @@ LinkedMap.prototype = {
         }
     },
 
-    get: function get(key, defaultValue) {
+    get(key, defaultValue) {
         let returnValue = defaultValue;
 
         if (this.containsKey(key)) {
@@ -54,11 +54,11 @@ LinkedMap.prototype = {
         return returnValue;
     },
 
-    isEmpty: function isEmpty() {
+    isEmpty() {
         return this._length === 0;
     },
 
-    keySet: function keySet() {
+    keySet() {
         let keys = new Set([]);
 
         this.forEach(function (key) {
@@ -68,7 +68,7 @@ LinkedMap.prototype = {
         return keys;
     },
 
-    put: function put(key, value) {
+    put(key, value) {
         this.remove(key);
 
         let item = {
@@ -94,14 +94,14 @@ LinkedMap.prototype = {
         this._length += 1;
     },
 
-    putAll: function putAll(map) {
+    putAll(map) {
         let self = this;
         Object.keys(map).forEach(function (key) {
             self.put(key, map[key]);
         });
     },
 
-    remove: function remove(key) {
+    remove(key) {
         if (!this.containsKey(key)) {
             return undefined;
         }
@@ -130,11 +130,11 @@ LinkedMap.prototype = {
         return item.value;
     },
 
-    size: function size() {
+    size() {
         return this._length;
     },
 
-    toArray: function toArray() {
+    toArray() {
         let arr = [];
 
         this.forEach(function (key, value) {
@@ -144,7 +144,7 @@ LinkedMap.prototype = {
         return arr;
     },
 
-    toMap: function toMap() {
+    toMap() {
         let map = Object.create(null);
 
         this.forEach(function (key, value) {
@@ -154,7 +154,7 @@ LinkedMap.prototype = {
         return map;
     },
 
-    inspect: function inspect() {
+    inspect() {
         let repr = [];
 
         this.forEach(function (key, value) {
@@ -178,20 +178,8 @@ LinkedMap.prototype = {
 //};
 
 /**
- * TODO: [This article][1] seems to suggest we should be able to do
- * something like this:
-LinkedMap.prototype = {
-    ...
-
-    [Symbol.iterator]: function* iterator() {
-        ...
-    },
-
-    ...
-};
- * However, at the time, this does not seem to work (iojs v2.0).
- *
- * [1]: https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/
+ * TODO: Use computed property names (ES6): [Symbol.iterator]: function* iterator() {}
+ *       Maybe even this (don't know if this is legal): *[Symbol.iterator]() {}
  */
 
 LinkedMap.prototype[Symbol.iterator] = function iterator() {

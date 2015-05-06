@@ -1,6 +1,6 @@
 {
   "name": "@rdcl/linkedmap",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A linked map.",
   "main": "index.js",
   "scripts": {
