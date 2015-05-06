@@ -166,18 +166,55 @@ LinkedMap.prototype = {
 
 };
 
-// TODO: Put this in the above declaration ([]-syntax not yet supported in objects).
+// I'd much rather do this using a generator, but this seems to be a lot
+// slower (as tested in iojs v2.0).
+//LinkedMap.prototype[Symbol.iterator] = function* iterator() {
+//    let item = this._head;
+//
+//    while (item != null) {
+//        yield [item.key, item.value];
+//        item = item.next;
+//    }
+//};
+
+/**
+ * TODO: [This article][1] seems to suggest we should be able to do
+ * something like this:
+LinkedMap.prototype = {
+    ...
+
+    [Symbol.iterator]: function* iterator() {
+        ...
+    },
+
+    ...
+};
+ * However, at the time, this does not seem to work (iojs v2.0).
+ *
+ * [1]: https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/
+ */
+
 LinkedMap.prototype[Symbol.iterator] = function iterator() {
-    let self = this;
+    let item = this._head;
 
-    return (function* () {
-        let item = self._head;
+    return {
+        next: function next() {
+            if (item == null) {
+                return {
+                    done: true,
+                };
+            }
 
-        while (item != null) {
-            yield [item.key, item.value];
+            let ret = {
+                value: [item.key, item.value],
+                done: false,
+            };
+
             item = item.next;
-        }
-    }());
+
+            return ret;
+        },
+    };
 };
 
 exports = module.exports = LinkedMap;
