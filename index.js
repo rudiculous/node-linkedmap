@@ -164,29 +164,29 @@ LinkedMap.prototype = {
         return repr;
     },
 
+    /* TODO: Write the iterator like this. There are two downsides:
+     *       - Generator seems to be much slower than returning an
+     *         object (as tested in iojs v2.0).
+     *       - ES6 computed property names are not yet supported in iojs
+     *         (unless you use a flag).
+     *       The iterator is now defined separately.
+     */
+    //*[Symbol.iterator]() {
+    //    let item = this._head;
+
+    //    while (item != null) {
+    //        yield [item.key, item.value];
+    //        item = item.next;
+    //    }
+    //},
+
 };
-
-// I'd much rather do this using a generator, but this seems to be a lot
-// slower (as tested in iojs v2.0).
-//LinkedMap.prototype[Symbol.iterator] = function* iterator() {
-//    let item = this._head;
-//
-//    while (item != null) {
-//        yield [item.key, item.value];
-//        item = item.next;
-//    }
-//};
-
-/**
- * TODO: Use computed property names (ES6): [Symbol.iterator]: function* iterator() {}
- *       Maybe even this (don't know if this is legal): *[Symbol.iterator]() {}
- */
 
 LinkedMap.prototype[Symbol.iterator] = function iterator() {
     let item = this._head;
 
     return {
-        next: function next() {
+        next() {
             if (item == null) {
                 return {
                     done: true,
