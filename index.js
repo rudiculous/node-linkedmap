@@ -1,9 +1,5 @@
 "use strict";
 
-/* Inspired by
- * http://codereview.stackexchange.com/questions/74330/simple-linked-hash-map-in-js-node-browser
- */
-
 /**
  * To prevent access to magic keys (e.g. __proto__), we prefix all keys.
  *
