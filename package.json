@@ -1,6 +1,6 @@
 {
   "name": "@rdcl/linkedmap",
-  "version": "1.0.4",
+  "version": "1.1.5",
   "description": "A linked map.",
   "main": "index.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rudiculous/rdcl-linkedmap.git"
+    "url": "git+https://github.com/rudiculous/node-linkedmap.git"
   },
   "author": "RJ van der Weide <rj@rudiculous.net> (http://rdcl.nl)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rudiculous/rdcl-linkedmap/issues"
+    "url": "https://github.com/rudiculous/node-linkedmap/issues"
   },
-  "homepage": "https://github.com/rudiculous/rdcl-linkedmap#readme",
+  "homepage": "https://github.com/rudiculous/node-linkedmap#readme",
   "engines": {
-    "iojs": "2.0.x"
+    "iojs": "2.x.x"
   }
 }
